@@ -16,8 +16,9 @@ public final class GenerateImage
 {
   public static void main(final String[] args) throws IOException
   {
-    final String inputPath = "C:\\Users\\Robert\\Projects\\Cpp\\Polyhedra\\";
-    final String outputPath = "C:\\Users\\Robert\\Projects\\Polyhedra\\UniformPolyhedra\\Images\\";
+    final String projectPath = "C:\\Users\\Robert\\Projects\\Polyhedra\\UniformPolyhedra\\";
+    final String inputPath = projectPath + "Assets\\";
+    final String outputPath = projectPath + "Images\\";
     generateUniform(inputPath + "Uniform\\", outputPath + "simple\\");
     generateCompounds(inputPath + "Compound\\", outputPath + "compound\\");
   }
