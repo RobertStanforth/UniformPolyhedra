@@ -1,4 +1,4 @@
-package xyz.stanforth.polyhedra.plotting;
+package xyz.stanforth.polyhedra.rendering;
 
 import xyz.stanforth.util.Ref;
 

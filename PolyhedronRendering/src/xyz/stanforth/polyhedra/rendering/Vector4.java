@@ -1,4 +1,4 @@
-package xyz.stanforth.polyhedra.plotting;
+package xyz.stanforth.polyhedra.rendering;
 
 /**
  * 4-vector.

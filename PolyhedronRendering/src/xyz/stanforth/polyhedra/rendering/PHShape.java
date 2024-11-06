@@ -1,4 +1,4 @@
-package xyz.stanforth.polyhedra.plotting;
+package xyz.stanforth.polyhedra.rendering;
 
 import java.util.List;
 

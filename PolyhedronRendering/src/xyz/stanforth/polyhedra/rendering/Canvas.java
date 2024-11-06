@@ -1,4 +1,4 @@
-package xyz.stanforth.polyhedra.plotting;
+package xyz.stanforth.polyhedra.rendering;
 
 /**
  * Surface on which pixels and rectangles can be drawn.
