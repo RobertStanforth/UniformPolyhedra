@@ -16,7 +16,171 @@ public final class GenerateImage
 {
   public static void main(final String[] args) throws IOException
   {
-    generate("Uniform\\r{52%5}.ph", 0, 1, false, "r{52%5}.png");
+    final String inputPath = "C:\\Users\\Robert\\Projects\\Cpp\\Polyhedra\\";
+    final String outputPath = "C:\\Users\\Robert\\Projects\\Polyhedra\\UniformPolyhedra\\Images\\";
+    generateUniform(inputPath + "Uniform\\", outputPath + "simple\\");
+    generateCompounds(inputPath + "Compound\\", outputPath + "compound\\");
+  }
+
+  /**
+   * Generates images of the uniform polyhedra.
+   * @param inputPath Path to read the polyhedra's .ph files.
+   * @param outputPath Path to write the rendered polyhedra.
+   */
+  public static void generateUniform(final String inputPath, final String outputPath) throws IOException
+  {
+    generate(inputPath + "{3,3}.ph", 0, 0, false, outputPath + "{3,3}.png");
+    generate(inputPath + "{4,3}.ph", 0, 0, false, outputPath + "{4,3}.png");
+    generate(inputPath + "{3,4}.ph", 0, 0, false, outputPath + "{3,4}.png");
+    generate(inputPath + "{5,3}.ph", 0, 0, false, outputPath + "{5,3}.png");
+    generate(inputPath + "{52,3}.ph", 0, 0, false, outputPath + "{52,3}.png");
+    generate(inputPath + "{3,5}.ph", 0, 0, false, outputPath + "{3,5}.png");
+    generate(inputPath + "{3,52}.ph", 0, 0, false, outputPath + "{3,52}.png");
+    generate(inputPath + "{52,5}.ph", 0, 0, false, outputPath + "{52,5}.png");
+    generate(inputPath + "{5,52}.ph", 0, 0, false, outputPath + "{5,52}.png");
+
+    generate(inputPath + "{3%3}.ph", 0, 0, false, outputPath + "{3h2}.png");
+    generate(inputPath + "{3%4}.ph", 0, 0, false, outputPath + "{3%4}.png");
+    generate(inputPath + "{3%4}.ph", 1, 0, false, outputPath + "{3h3}.png");
+    generate(inputPath + "{3%4}.ph", 2, 0, false, outputPath + "{4h3}.png");
+    generate(inputPath + "{3%5}.ph", 0, 0, false, outputPath + "{3%5}.png");
+    generate(inputPath + "{3%5}.ph", 1, 0, false, outputPath + "{3h5}.png");
+    generate(inputPath + "{3%5}.ph", 2, 0, false, outputPath + "{5h5}.png");
+    generate(inputPath + "{3%52}.ph", 0, 0, false, outputPath + "{3%52}.png");
+    generate(inputPath + "{3%52}.ph", 1, 0, false, outputPath + "{3h52}.png");
+    generate(inputPath + "{3%52}.ph", 2, 0, false, outputPath + "{52h52}.png");
+    generate(inputPath + "{52%5}.ph", 0, 0, false, outputPath + "{52%5}.png");
+    generate(inputPath + "{52%5}.ph", 1, 0, false, outputPath + "{52h3}.png");
+    generate(inputPath + "{52%5}.ph", 2, 0, false, outputPath + "{5h3}.png");
+    generate(inputPath + "{3%52,3}.ph", 0, 0, false, outputPath + "{3%52,3}.png");
+    generate(inputPath + "{3%52,3}.ph", 1, 0, false, outputPath + "{3%5,3}.png");
+    generate(inputPath + "{3%52,3}.ph", 2, 0, false, outputPath + "{52%5,3}.png");
+
+    generate(inputPath + "t{3,3}.ph", 0, 0, false, outputPath + "t{3,3}.png");
+    generate(inputPath + "t{4,3}.ph", 0, 0, false, outputPath + "t{4,3}.png");
+    generate(inputPath + "t`{4,3}.ph", 0, 0, false, outputPath + "t`{4,3}.png");
+    generate(inputPath + "t{3,4}.ph", 0, 0, false, outputPath + "t{3,4}.png");
+    generate(inputPath + "t{5,3}.ph", 0, 0, false, outputPath + "t{5,3}.png");
+    generate(inputPath + "t`{52,3}.ph", 0, 0, false, outputPath + "t`{52,3}.png");
+    generate(inputPath + "t{3,5}.ph", 0, 0, false, outputPath + "t{3,5}.png");
+    generate(inputPath + "t{3,52}.ph", 0, 0, false, outputPath + "t{3,52}.png");
+    generate(inputPath + "t{5,52}.ph", 0, 0, false, outputPath + "t{5,52}.png");
+    generate(inputPath + "t`{52,5}.ph", 0, 0, false, outputPath + "t`{52,5}.png");
+    generate(inputPath + "r{3%4}.ph", 0, 0, false, outputPath + "r{3%4}.png");
+    generate(inputPath + "r{3%4}.ph", 1, 0, false, outputPath + "h`{3%4,4}.png");
+    generate(inputPath + "r{3%4}.ph", 2, 0, false, outputPath + "r{3%4}_h`{3%4,4}.png");
+    generate(inputPath + "r`{3%4}.ph", 0, 0, false, outputPath + "r`{3%4}.png");
+    generate(inputPath + "r`{3%4}.ph", 1, 0, false, outputPath + "h{3%4,4}.png");
+    generate(inputPath + "r`{3%4}.ph", 2, 0, false, outputPath + "r`{3%4}_h{3%4,4}.png");
+    generate(inputPath + "r{3%5}.ph", 0, 0, false, outputPath + "r{3%5}.png");
+    generate(inputPath + "r{3%5}.ph", 1, 0, false, outputPath + "h`{3%5,5}.png");
+    generate(inputPath + "r{3%5}.ph", 2, 0, false, outputPath + "r{3%5}_h`{3%5,5}.png");
+    generate(inputPath + "r`{3%52}.ph", 0, 0, false, outputPath + "r`{3%52}.png");
+    generate(inputPath + "r`{3%52}.ph", 1, 0, false, outputPath + "h{3%52,52}.png");
+    generate(inputPath + "r`{3%52}.ph", 2, 0, false, outputPath + "r`{3%52}_h{3%52,52}.png");
+    generate(inputPath + "r{52%5}.ph", 0, 0, false, outputPath + "r{52%5}.png");
+    generate(inputPath + "r{52%5}.ph", 1, 0, false, outputPath + "h`{52%5,3}.png");
+    generate(inputPath + "r{52%5}.ph", 2, 0, false, outputPath + "r{52%5}_h`{52%5,3}.png");
+    generate(inputPath + "h{3%52,3}.ph", 0, 0, false, outputPath + "h{3%52,3}.png");
+    generate(inputPath + "h{3%52,3}.ph", 1, 0, false, outputPath + "h`{3%52,5}.png");
+    generate(inputPath + "h{3%52,3}.ph", 2, 0, false, outputPath + "h{3%52,3}_h`{3%52,5}.png");
+    generate(inputPath + "h`{3%5,3}.ph", 0, 0, false, outputPath + "h`{3%5,3}.png");
+    generate(inputPath + "h`{3%5,3}.ph", 1, 0, false, outputPath + "h{3%5,52}.png");
+    generate(inputPath + "h`{3%5,3}.ph", 2, 0, false, outputPath + "h`{3%5,3}_h{3%5,52}.png");
+
+    generate(inputPath + "t{3%4}.ph", 0, 0, false, outputPath + "t{3%4}.png");
+    generate(inputPath + "t`{3%4}.ph", 0, 0, false, outputPath + "t`{3%4}.png");
+    generate(inputPath + "t{3%5}.ph", 0, 0, false, outputPath + "t{3%5}.png");
+    generate(inputPath + "t`{3%52}.ph", 0, 0, false, outputPath + "t`{3%52}.png");
+    generate(inputPath + "t`{52%5}.ph", 0, 0, false, outputPath + "t`{52%5}.png");
+    generate(inputPath + "t`{3%4%4}.ph", 0, 0, false, outputPath + "t`{3%4%4}.png");
+    generate(inputPath + "t`{3%5%52}.ph", 0, 0, false, outputPath + "t`{3%5%52}.png");
+
+    generate(inputPath + "s{3%4}.ph", 0, 0, false, outputPath + "s{3%4}.png");
+    generate(inputPath + "s{3%5}.ph", 0, 0, false, outputPath + "s{3%5}.png");
+    generate(inputPath + "s{3%52}.ph", 0, 0, false, outputPath + "s{3%52}.png");
+    generate(inputPath + "s`{3%52}.ph", 0, 0, false, outputPath + "s`{3%52}.png");
+    generate(inputPath + "s``{3%52}.ph", 0, 0, false, outputPath + "s``{3%52}.png");
+    generate(inputPath + "s{52%5}.ph", 0, 0, false, outputPath + "s{52%5}.png");
+    generate(inputPath + "s`{52%5}.ph", 0, 0, false, outputPath + "s`{52%5}.png");
+    generate(inputPath + "s{3%3%52}.ph", 0, 0, false, outputPath + "s{3%3%52}.png");
+    generate(inputPath + "s``{3%3%52}.ph", 0, 0, false, outputPath + "s``{3%3%52}.png");
+    generate(inputPath + "s`{3%52%5}.ph", 0, 0, false, outputPath + "s`{3%52%5}.png");
+    generate(inputPath + "s`{3%52%52}.ph", 0, 0, false, outputPath + "s`{3%52%52}.png");
+    generate(inputPath + "s`{3%52%52}.ph", 1, 0, false, outputPath + "dr{3%52}.png");
+    generate(inputPath + "s`{3%52%52}.ph", 2, 0, false, outputPath + "sdr{3%52}.png");
+  }
+
+  /**
+   * Generates images of the uniform compounds of uniform polyhedra.
+   * @param inputPath Path to read the polyhedra's .ph files.
+   * @param outputPath Path to write the rendered polyhedra.
+   */
+  public static void generateCompounds(final String inputPath, final String outputPath) throws IOException
+  {
+    generate(inputPath + "2{3,3}.ph", 0, 0, true, outputPath + "2{3,3}.png");
+    generate(inputPath + "2t{3,3}.ph", 0, 0, true, outputPath + "2t{3,3}.png");
+    generate(inputPath + "2{3,5}.ph", 0, 0, true, outputPath + "2{3,5}.png");
+    generate(inputPath + "2{3,52}.ph", 0, 0, true, outputPath + "2{3,52}.png");
+    generate(inputPath + "2{52,5}.ph", 0, 0, true, outputPath + "2{52,5}.png");
+    generate(inputPath + "2{5,52}.ph", 0, 0, true, outputPath + "2{5,52}.png");
+    generate(inputPath + "2s{3%4}.ph", 0, 0, true, outputPath + "2s{3%4}.png");
+    generate(inputPath + "2s{3%5}.ph", 0, 0, true, outputPath + "2s{3%5}.png");
+    generate(inputPath + "2s{3%52}.ph", 0, 0, true, outputPath + "2s{3%52}.png");
+    generate(inputPath + "2s`{3%52}.ph", 0, 0, true, outputPath + "2s`{3%52}.png");
+    generate(inputPath + "2s``{3%52}.ph", 0, 0, true, outputPath + "2s``{3%52}.png");
+    generate(inputPath + "2s{52%5}.ph", 0, 0, true, outputPath + "2s{52%5}.png");
+    generate(inputPath + "2s`{52%5}.ph", 0, 0, true, outputPath + "2s`{52%5}.png");
+    generate(inputPath + "2s`{3%52%5}.ph", 0, 0, true, outputPath + "2s`{3%52%5}.png");
+
+    generate(inputPath + "5{3,3}.ph", 0, 1, true, outputPath + "5{3,3}.png");
+    generate(inputPath + "10{3,3}.ph", 0, 1, true, outputPath + "10{3,3}.png");
+    generate(inputPath + "5{4,3}.ph", 0, 1, true, outputPath + "5{4,3}.png");
+    generate(inputPath + "5{3,4}.ph", 0, 1, true, outputPath + "5{3,4}.png");
+    generate(inputPath + "5{3%3}.ph", 0, 1, true, outputPath + "5{3h2}.png");
+    generate(inputPath + "5{3,5}.ph", 0, 1, true, outputPath + "5{3,5}.png");
+    generate(inputPath + "5{3,52}.ph", 0, 1, true, outputPath + "5{3,52}.png");
+    generate(inputPath + "5{52,5}.ph", 0, 1, true, outputPath + "5{52,5}.png");
+    generate(inputPath + "5{5,52}.ph", 0, 1, true, outputPath + "5{5,52}.png");
+    generate(inputPath + "5{3%4}.ph", 0, 1, true, outputPath + "5{3%4}.png");
+    generate(inputPath + "5{3%4}.ph", 1, 1, true, outputPath + "5{3h3}.png");
+    generate(inputPath + "5{3%4}.ph", 2, 1, true, outputPath + "5{4h3}.png");
+    generate(inputPath + "5t{3,3}.ph", 0, 1, true, outputPath + "5t{3,3}.png");
+    generate(inputPath + "10t{3,3}.ph", 0, 1, true, outputPath + "10t{3,3}.png");
+    generate(inputPath + "5t{4,3}.ph", 0, 1, true, outputPath + "5t{4,3}.png");
+    generate(inputPath + "5t`{4,3}.ph", 0, 1, true, outputPath + "5t`{4,3}.png");
+    generate(inputPath + "5r{3%4}.ph", 0, 1, true, outputPath + "5r{3%4}.png");
+    generate(inputPath + "5r{3%4}.ph", 1, 1, true, outputPath + "5h`{3%4,4}.png");
+    generate(inputPath + "5r{3%4}.ph", 2, 1, true, outputPath + "5r{3%4}_h`{3%4,4}.png");
+    generate(inputPath + "5r`{3%4}.ph", 0, 1, true, outputPath + "5r`{3%4}.png");
+    generate(inputPath + "5r`{3%4}.ph", 1, 1, true, outputPath + "5h{3%4,4}.png");
+    generate(inputPath + "5r`{3%4}.ph", 2, 1, true, outputPath + "5r`{3%4}_h{3%4,4}.png");
+
+    generate(inputPath + "3{4,3}.ph", 0, 2, true, outputPath + "3{4,3}.png");
+    generate(inputPath + "6{3,3}.ph", 0, 2, true, outputPath + "6{3,3}.png");
+    generate(inputPath + "3a{4}.ph", 0, 2, true, outputPath + "3a{4}.png");
+    generate(inputPath + "6a{4}.ph", 0, 2, true, outputPath + "6a{4}.png");
+    generate(inputPath + "4p{3}.ph", 0, 1, true, outputPath + "4p{3}.png");
+    generate(inputPath + "8p{3}.ph", 0, 1, true, outputPath + "8p{3}.png");
+    generate(inputPath + "4p{6}.ph", 0, 1, true, outputPath + "4p{6}.png");
+    generate(inputPath + "4{3,4}.ph", 0, 1, true, outputPath + "4{3,4}.png");
+    generate(inputPath + "6p{5}.ph", 0, 2, true, outputPath + "6p{5}.png");
+    generate(inputPath + "12p{5}.ph", 0, 2, true, outputPath + "12p{5}.png");
+    generate(inputPath + "6p{52}.ph", 0, 2, true, outputPath + "6p{52}.png");
+    generate(inputPath + "12p{52}.ph", 0, 2, true, outputPath + "12p{52}.png");
+    generate(inputPath + "6a{52}.ph", 0, 2, true, outputPath + "6a{52}.png");
+    generate(inputPath + "12a{52}.ph", 0, 2, true, outputPath + "12a{52}.png");
+    generate(inputPath + "6p{X}.ph", 0, 2, true, outputPath + "6p{X}.png");
+    generate(inputPath + "6p{X3}.ph", 0, 2, true, outputPath + "6p{X3}.png");
+    generate(inputPath + "6a{5}.ph", 0, 2, true, outputPath + "6a{5}.png");
+    generate(inputPath + "6a`{52}.ph", 0, 2, true, outputPath + "6a`{52}.png");
+    generate(inputPath + "10p{3}.ph", 0, 0, true, outputPath + "10p{3}.png");
+    generate(inputPath + "20p{3}.ph", 0, 0, true, outputPath + "20p{3}.png");
+    generate(inputPath + "10p{6}.ph", 0, 0, true, outputPath + "10p{6}.png");
+    generate(inputPath + "10{3,4}a.ph", 0, 0, true, outputPath + "10{3,4}a.png");
+    generate(inputPath + "10{3,4}b.ph", 0, 0, true, outputPath + "10{3,4}b.png");
+    generate(inputPath + "20{3,4}.ph", 0, 0, true, outputPath + "20{3,4}.png");
+    generate(inputPath + "20{3%3}.ph", 0, 0, true, outputPath + "20{3h2}.png");
   }
 
   /**
@@ -35,11 +199,11 @@ public final class GenerateImage
           final String outputFileName) throws IOException
   {
     System.out.println("Processing " + outputFileName + " ...");
-    final PHPolyhedron polyhedron = loadPolyhedron("C:\\Users\\Robert\\Projects\\Cpp\\Polyhedra\\" + inputFileName);
+    final PHPolyhedron polyhedron = loadPolyhedron(inputFileName);
 
     final List<? extends PHShape> worldShapes = WorldBuilding.generateWorld(polyhedron, 1<<combination, palette);
 
-    final Transform eye = Viewing.inverseEye(Math.PI - 1.1, Math.PI + 0.2, 10.);
+    final Transform eye = Viewing.inverseEye(Math.PI - 1.1, Math.PI + 0.12, 10.);
     final List<? extends PHShape> projectedShapes = Viewing.view(
             worldShapes,
             eye,
@@ -56,7 +220,7 @@ public final class GenerateImage
     Plotting.plot(canvas, projectedShapes, xorCompound, 0.102);
     final RenderedImage image = imageSupplier.get();
 
-    saveImage("C:\\Users\\Robert\\Projects\\Polyhedra\\UniformPolyhedra\\Images\\" + outputFileName, image);
+    saveImage(outputFileName, image);
   }
 
   /**
