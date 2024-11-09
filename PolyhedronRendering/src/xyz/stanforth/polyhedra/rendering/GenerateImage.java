@@ -30,6 +30,8 @@ public final class GenerateImage
    */
   public static void generateUniform(final String inputPath, final String outputPath) throws IOException
   {
+    new File(outputPath).mkdir();
+
     generate(inputPath + "{3_3}.ph", 0, 0, false, outputPath + "{3_3}.png");
     generate(inputPath + "{4_3}.ph", 0, 0, false, outputPath + "{4_3}.png");
     generate(inputPath + "{3_4}.ph", 0, 0, false, outputPath + "{3_4}.png");
@@ -110,6 +112,92 @@ public final class GenerateImage
     generate(inputPath + "s1{3x52x52}.ph", 0, 0, false, outputPath + "s1{3x52x52}.png");
     generate(inputPath + "s1{3x52x52}.ph", 1, 0, false, outputPath + "dr{3x52}.png");
     generate(inputPath + "s1{3x52x52}.ph", 2, 0, false, outputPath + "sdr{3x52}.png");
+
+    generateDihedral(inputPath + "Dihedral\\", outputPath + "dihedral\\");
+  }
+
+  /**
+   * Generates images of the dihedral (prismatic) uniform polyhedra.
+   * @param inputPath Path to read the polyhedra's .ph files.
+   * @param outputPath Path to write the rendered polyhedra.
+   */
+  public static void generateDihedral(final String inputPath, final String outputPath) throws IOException
+  {
+    new File(outputPath).mkdir();
+
+    generate(inputPath + "p{3}.ph", 0, 0, false, outputPath + "p{3}.png");
+    generate(inputPath + "p{5}.ph", 0, 0, false, outputPath + "p{5}.png");
+    generate(inputPath + "p{52}.ph", 0, 0, false, outputPath + "p{52}.png");
+    generate(inputPath + "p{52}.ph", 0, 0, true, outputPath + "p{52}_xor.png");
+    generate(inputPath + "p{6}.ph", 0, 0, false, outputPath + "p{6}.png");
+    generate(inputPath + "p{7}.ph", 0, 0, false, outputPath + "p{7}.png");
+    generate(inputPath + "p{72}.ph", 0, 0, false, outputPath + "p{72}.png");
+    generate(inputPath + "p{72}.ph", 0, 0, true, outputPath + "p{72}_xor.png");
+    generate(inputPath + "p{73}.ph", 0, 0, false, outputPath + "p{73}.png");
+    generate(inputPath + "p{73}.ph", 0, 0, true, outputPath + "p{73}_xor.png");
+    generate(inputPath + "p{8}.ph", 0, 0, false, outputPath + "p{8}.png");
+    generate(inputPath + "p{83}.ph", 0, 0, false, outputPath + "p{83}.png");
+    generate(inputPath + "p{83}.ph", 0, 0, true, outputPath + "p{83}_xor.png");
+    generate(inputPath + "p{9}.ph", 0, 0, false, outputPath + "p{9}.png");
+    generate(inputPath + "p{92}.ph", 0, 0, false, outputPath + "p{92}.png");
+    generate(inputPath + "p{92}.ph", 0, 0, true, outputPath + "p{92}_xor.png");
+    generate(inputPath + "p{94}.ph", 0, 0, false, outputPath + "p{94}.png");
+    generate(inputPath + "p{94}.ph", 0, 0, true, outputPath + "p{94}_xor.png");
+    generate(inputPath + "p{X}.ph", 0, 0, false, outputPath + "p{X}.png");
+    generate(inputPath + "p{X3}.ph", 0, 0, false, outputPath + "p{X3}.png");
+    generate(inputPath + "p{X3}.ph", 0, 0, true, outputPath + "p{X3}_xor.png");
+    generate(inputPath + "p{Y}.ph", 0, 0, false, outputPath + "p{Y}.png");
+    generate(inputPath + "p{Y2}.ph", 0, 0, false, outputPath + "p{Y2}.png");
+    generate(inputPath + "p{Y2}.ph", 0, 0, true, outputPath + "p{Y2}_xor.png");
+    generate(inputPath + "p{Y3}.ph", 0, 0, false, outputPath + "p{Y3}.png");
+    generate(inputPath + "p{Y3}.ph", 0, 0, true, outputPath + "p{Y3}_xor.png");
+    generate(inputPath + "p{Y4}.ph", 0, 0, false, outputPath + "p{Y4}.png");
+    generate(inputPath + "p{Y4}.ph", 0, 0, true, outputPath + "p{Y4}_xor.png");
+    generate(inputPath + "p{Y5}.ph", 0, 0, false, outputPath + "p{Y5}.png");
+    generate(inputPath + "p{Y5}.ph", 0, 0, true, outputPath + "p{Y5}_xor.png");
+
+    generate(inputPath + "a{4}.ph", 0, 0, false, outputPath + "a{4}.png");
+    generate(inputPath + "a{5}.ph", 0, 0, false, outputPath + "a{5}.png");
+    generate(inputPath + "a{52}.ph", 0, 0, false, outputPath + "a{52}.png");
+    generate(inputPath + "a{52}.ph", 0, 0, true, outputPath + "a{52}_xor.png");
+    generate(inputPath + "a1{52}.ph", 0, 0, false, outputPath + "a1{52}.png");
+    generate(inputPath + "a1{52}.ph", 0, 0, true, outputPath + "a1{52}_xor.png");
+    generate(inputPath + "a{6}.ph", 0, 0, false, outputPath + "a{6}.png");
+    generate(inputPath + "a{7}.ph", 0, 0, false, outputPath + "a{7}.png");
+    generate(inputPath + "a{72}.ph", 0, 0, false, outputPath + "a{72}.png");
+    generate(inputPath + "a{72}.ph", 0, 0, true, outputPath + "a{72}_xor.png");
+    generate(inputPath + "a{73}.ph", 0, 0, false, outputPath + "a{73}.png");
+    generate(inputPath + "a{73}.ph", 0, 0, true, outputPath + "a{73}_xor.png");
+    generate(inputPath + "a1{73}.ph", 0, 0, false, outputPath + "a1{73}.png");
+    generate(inputPath + "a1{73}.ph", 0, 0, true, outputPath + "a1{73}_xor.png");
+    generate(inputPath + "a{8}.ph", 0, 0, false, outputPath + "a{8}.png");
+    generate(inputPath + "a{83}.ph", 0, 0, false, outputPath + "a{83}.png");
+    generate(inputPath + "a{83}.ph", 0, 0, true, outputPath + "a{83}_xor.png");
+    generate(inputPath + "a1{83}.ph", 0, 0, false, outputPath + "a1{83}.png");
+    generate(inputPath + "a1{83}.ph", 0, 0, true, outputPath + "a1{83}_xor.png");
+    generate(inputPath + "a{9}.ph", 0, 0, false, outputPath + "a{9}.png");
+    generate(inputPath + "a{92}.ph", 0, 0, false, outputPath + "a{92}.png");
+    generate(inputPath + "a{92}.ph", 0, 0, true, outputPath + "a{92}_xor.png");
+    generate(inputPath + "a{94}.ph", 0, 0, false, outputPath + "a{94}.png");
+    generate(inputPath + "a{94}.ph", 0, 0, true, outputPath + "a{94}_xor.png");
+    generate(inputPath + "a1{94}.ph", 0, 0, false, outputPath + "a1{94}.png");
+    generate(inputPath + "a1{94}.ph", 0, 0, true, outputPath + "a1{94}_xor.png");
+    generate(inputPath + "a{X}.ph", 0, 0, false, outputPath + "a{X}.png");
+    generate(inputPath + "a{X3}.ph", 0, 0, false, outputPath + "a{X3}.png");
+    generate(inputPath + "a{X3}.ph", 0, 0, true, outputPath + "a{X3}_xor.png");
+    generate(inputPath + "a{Y}.ph", 0, 0, false, outputPath + "a{Y}.png");
+    generate(inputPath + "a{Y2}.ph", 0, 0, false, outputPath + "a{Y2}.png");
+    generate(inputPath + "a{Y2}.ph", 0, 0, true, outputPath + "a{Y2}_xor.png");
+    generate(inputPath + "a{Y3}.ph", 0, 0, false, outputPath + "a{Y3}.png");
+    generate(inputPath + "a{Y3}.ph", 0, 0, true, outputPath + "a{Y3}_xor.png");
+    generate(inputPath + "a{Y4}.ph", 0, 0, false, outputPath + "a{Y4}.png");
+    generate(inputPath + "a{Y4}.ph", 0, 0, true, outputPath + "a{Y4}_xor.png");
+    generate(inputPath + "a{Y5}.ph", 0, 0, false, outputPath + "a{Y5}.png");
+    generate(inputPath + "a{Y5}.ph", 0, 0, true, outputPath + "a{Y5}_xor.png");
+    generate(inputPath + "a1{Y5}.ph", 0, 0, false, outputPath + "a1{Y5}.png");
+    generate(inputPath + "a1{Y5}.ph", 0, 0, true, outputPath + "a1{Y5}_xor.png");
+    generate(inputPath + "a1{Y4}.ph", 0, 0, false, outputPath + "a1{Y4}.png");
+    generate(inputPath + "a1{Y4}.ph", 0, 0, true, outputPath + "a1{Y4}_xor.png");
   }
 
   /**
@@ -119,6 +207,8 @@ public final class GenerateImage
    */
   public static void generateCompounds(final String inputPath, final String outputPath) throws IOException
   {
+    new File(outputPath).mkdir();
+
     generate(inputPath + "2{3_3}.ph", 0, 0, true, outputPath + "2{3_3}.png");
     generate(inputPath + "2t{3_3}.ph", 0, 0, true, outputPath + "2t{3_3}.png");
     generate(inputPath + "2{3_5}.ph", 0, 0, true, outputPath + "2{3_5}.png");
@@ -182,6 +272,34 @@ public final class GenerateImage
     generate(inputPath + "10{3_4}b.ph", 0, 0, true, outputPath + "10{3_4}b.png");
     generate(inputPath + "20{3_4}.ph", 0, 0, true, outputPath + "20{3_4}.png");
     generate(inputPath + "20{3x3}.ph", 0, 0, true, outputPath + "20{3h2}.png");
+
+    generateDihedralCompounds(inputPath + "Dihedral\\", outputPath + "dihedral\\");
+  }
+
+  /**
+   * Generates images of the dihedral (prismatic) uniform compounds of uniform polyhedra.
+   * @param inputPath Path to read the polyhedra's .ph files.
+   * @param outputPath Path to write the rendered polyhedra.
+   */
+  public static void generateDihedralCompounds(final String inputPath, final String outputPath) throws IOException
+  {
+    new File(outputPath).mkdir();
+
+    generate(inputPath + "2p{3}.ph", 0, 0, true, outputPath + "2p{3}_xor.png");
+    generate(inputPath + "2{4_3}.ph", 0, 0, true, outputPath + "2{4_3}_xor.png");
+    generate(inputPath + "2p{5}.ph", 0, 0, true, outputPath + "2p{5}_xor.png");
+    generate(inputPath + "2p{52}.ph", 0, 0, true, outputPath + "2p{52}_xor.png");
+    generate(inputPath + "3p{3}.ph", 0, 0, true, outputPath + "3p{3}_xor.png");
+
+    generate(inputPath + "2{3_4}.ph", 0, 0, true, outputPath + "2{3_4}_xor.png");
+    generate(inputPath + "2a{4}.ph", 0, 0, true, outputPath + "2a{4}_xor.png");
+    generate(inputPath + "2a{5}.ph", 0, 0, true, outputPath + "2a{5}_xor.png");
+    generate(inputPath + "2a{52}.ph", 0, 0, true, outputPath + "2a{52}_xor.png");
+    generate(inputPath + "2a1{52}.ph", 0, 0, true, outputPath + "2a1{52}_xor.png");
+    generate(inputPath + "3{3_3}.ph", 0, 0, true, outputPath + "3{3_3}.png");
+    generate(inputPath + "3{3_4}.ph", 0, 0, true, outputPath + "3{3_4}_xor.png");
+    generate(inputPath + "4{3_3}.ph", 0, 0, true, outputPath + "4{3_3}.png");
+    generate(inputPath + "5{3_3}.ph", 0, 0, true, outputPath + "5{3_3}.png");
   }
 
   /**
