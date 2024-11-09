@@ -285,19 +285,19 @@ public final class GenerateImage
   {
     new File(outputPath).mkdir();
 
-    generate(inputPath + "2p{3}.ph", 0, 0, true, outputPath + "2p{3}_xor.png");
-    generate(inputPath + "2{4_3}.ph", 0, 0, true, outputPath + "2{4_3}_xor.png");
-    generate(inputPath + "2p{5}.ph", 0, 0, true, outputPath + "2p{5}_xor.png");
-    generate(inputPath + "2p{52}.ph", 0, 0, true, outputPath + "2p{52}_xor.png");
-    generate(inputPath + "3p{3}.ph", 0, 0, true, outputPath + "3p{3}_xor.png");
+    generate(inputPath + "2p{3}.ph", 0, 0, true, outputPath + "2p{3}.png");
+    generate(inputPath + "2{4_3}.ph", 0, 0, true, outputPath + "2{4_3}.png");
+    generate(inputPath + "2p{5}.ph", 0, 0, true, outputPath + "2p{5}.png");
+    generate(inputPath + "2p{52}.ph", 0, 0, true, outputPath + "2p{52}.png");
+    generate(inputPath + "3p{3}.ph", 0, 0, true, outputPath + "3p{3}.png");
 
-    generate(inputPath + "2{3_4}.ph", 0, 0, true, outputPath + "2{3_4}_xor.png");
-    generate(inputPath + "2a{4}.ph", 0, 0, true, outputPath + "2a{4}_xor.png");
-    generate(inputPath + "2a{5}.ph", 0, 0, true, outputPath + "2a{5}_xor.png");
-    generate(inputPath + "2a{52}.ph", 0, 0, true, outputPath + "2a{52}_xor.png");
-    generate(inputPath + "2a1{52}.ph", 0, 0, true, outputPath + "2a1{52}_xor.png");
+    generate(inputPath + "2{3_4}.ph", 0, 0, true, outputPath + "2{3_4}.png");
+    generate(inputPath + "2a{4}.ph", 0, 0, true, outputPath + "2a{4}.png");
+    generate(inputPath + "2a{5}.ph", 0, 0, true, outputPath + "2a{5}.png");
+    generate(inputPath + "2a{52}.ph", 0, 0, true, outputPath + "2a{52}.png");
+    generate(inputPath + "2a1{52}.ph", 0, 0, true, outputPath + "2a1{52}.png");
     generate(inputPath + "3{3_3}.ph", 0, 0, true, outputPath + "3{3_3}.png");
-    generate(inputPath + "3{3_4}.ph", 0, 0, true, outputPath + "3{3_4}_xor.png");
+    generate(inputPath + "3{3_4}.ph", 0, 0, true, outputPath + "3{3_4}.png");
     generate(inputPath + "4{3_3}.ph", 0, 0, true, outputPath + "4{3_3}.png");
     generate(inputPath + "5{3_3}.ph", 0, 0, true, outputPath + "5{3_3}.png");
   }
