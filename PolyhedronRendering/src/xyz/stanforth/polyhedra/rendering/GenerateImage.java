@@ -22,9 +22,8 @@ public final class GenerateImage
     final String projectPath = "C:\\Users\\Robert\\Projects\\Polyhedra\\UniformPolyhedra\\";
     final String inputPath = projectPath + "Assets\\";
     final String outputPath = projectPath + "Images\\";
-//    generateUniform(inputPath + "Uniform\\", outputPath + "simple\\");
-//    generateCompounds(inputPath + "Compound\\", outputPath + "compound\\");
-    generateRotating(inputPath + "Compound\\6{3_3}.phr", Math.PI, 0, 0, true, outputPath + "test.gif");
+    generateUniform(inputPath + "Uniform\\", outputPath + "simple\\");
+    generateCompounds(inputPath + "Compound\\", outputPath + "compound\\");
   }
 
   /**
@@ -253,17 +252,17 @@ public final class GenerateImage
 
     generate(inputPath + "3{4_3}.ph", 0, 2, true, outputPath + "3{4_3}.png");
     generate(inputPath + "6{3_3}.ph", 0, 2, true, outputPath + "6{3_3}.png");
-    generateRotating(inputPath + "6{4_3}.phr", Math.PI/2., 0, 0, true, outputPath + "6{4_3}.gif");
-    generateRotating(inputPath + "12{3_3}.phr", Math.PI/2., 0, 0, true, outputPath + "12{3_3}.gif");
-    generateRotating(inputPath + "6{3_3}.phr", Math.PI, 0, 0, true, outputPath + "6{3_3}.gif");
+    generateRotating(inputPath + "6{4_3}.phr", Math.PI/2., 40, 0, 0, true, outputPath + "6{4_3}.gif");
+    generateRotating(inputPath + "12{3_3}.phr", Math.PI/2., 40, 0, 0, true, outputPath + "12{3_3}.gif");
+    generateRotating(inputPath + "6{3_3}.phr", Math.PI, 40, 0, 0, true, outputPath + "6{3_3}.gif");
     generate(inputPath + "3a{4}.ph", 0, 2, true, outputPath + "3a{4}.png");
     generate(inputPath + "6a{4}.ph", 0, 2, true, outputPath + "6a{4}.png");
     generate(inputPath + "4p{3}.ph", 0, 1, true, outputPath + "4p{3}.png");
     generate(inputPath + "8p{3}.ph", 0, 1, true, outputPath + "8p{3}.png");
     generate(inputPath + "4p{6}.ph", 0, 1, true, outputPath + "4p{6}.png");
     generate(inputPath + "4{3_4}.ph", 0, 1, true, outputPath + "4{3_4}.png");
-    generateRotating(inputPath + "4{3_4}.phr", 2.*Math.PI/3., 0, 0, true, outputPath + "4{3_4}.gif");
-    generateRotating(inputPath + "8{3_4}.phr", 2.*Math.PI/3., 0, 0, true, outputPath + "8{3_4}.gif");
+    generateRotating(inputPath + "4{3_4}.phr", 2.*Math.PI/3., 40, 0, 0, true, outputPath + "4{3_4}.gif");
+    generateRotating(inputPath + "8{3_4}.phr", 2.*Math.PI/3., 40, 0, 0, true, outputPath + "8{3_4}.gif");
     generate(inputPath + "6p{5}.ph", 0, 2, true, outputPath + "6p{5}.png");
     generate(inputPath + "12p{5}.ph", 0, 2, true, outputPath + "12p{5}.png");
     generate(inputPath + "6p{52}.ph", 0, 2, true, outputPath + "6p{52}.png");
@@ -274,14 +273,14 @@ public final class GenerateImage
     generate(inputPath + "6p{X3}.ph", 0, 2, true, outputPath + "6p{X3}.png");
     generate(inputPath + "6a{5}.ph", 0, 2, true, outputPath + "6a{5}.png");
     generate(inputPath + "6a1{52}.ph", 0, 2, true, outputPath + "6a1{52}.png");
-    generateRotating(inputPath + "12a{5}.phr", 2.*Math.PI/5., 0, 0, true, outputPath + "12a{5}.gif");
-    generateRotating(inputPath + "12a1{52}.phr", 2.*Math.PI/5., 0, 0, true, outputPath + "12a1{52}.gif");
+    generateRotating(inputPath + "12a{5}.phr", 2.*Math.PI/5., 40, 0, 0, true, outputPath + "12a{5}.gif");
+    generateRotating(inputPath + "12a1{52}.phr", 2.*Math.PI/5., 40, 0, 0, true, outputPath + "12a1{52}.gif");
     generate(inputPath + "10p{3}.ph", 0, 0, true, outputPath + "10p{3}.png");
     generate(inputPath + "20p{3}.ph", 0, 0, true, outputPath + "20p{3}.png");
     generate(inputPath + "10p{6}.ph", 0, 0, true, outputPath + "10p{6}.png");
     generate(inputPath + "10{3_4}a.ph", 0, 0, true, outputPath + "10{3_4}a.png");
     generate(inputPath + "10{3_4}b.ph", 0, 0, true, outputPath + "10{3_4}b.png");
-    generateRotating(inputPath + "20{3_4}.phr", 2.*Math.PI/3., 0, 0, true, outputPath + "20{3_4}.gif");
+    generateRotating(inputPath + "20{3_4}.phr", 2.*Math.PI/3., 40, 0, 0, true, outputPath + "20{3_4}.gif");
     generate(inputPath + "20{3_4}.ph", 0, 0, true, outputPath + "20{3_4}.png");
     generate(inputPath + "20{3x3}.ph", 0, 0, true, outputPath + "20{3h2}.png");
 
@@ -302,6 +301,10 @@ public final class GenerateImage
     generate(inputPath + "2p{5}.ph", 0, 0, true, outputPath + "2p{5}.png");
     generate(inputPath + "2p{52}.ph", 0, 0, true, outputPath + "2p{52}.png");
     generate(inputPath + "3p{3}.ph", 0, 0, true, outputPath + "3p{3}.png");
+    generateRotating(inputPath + "2p{3}.phr", 2.*Math.PI, 60, 0, 0, true, outputPath + "2p{3}.gif");
+    generateRotating(inputPath + "2{4_3}.phr", 2.*Math.PI, 80, 0, 0, true, outputPath + "2{4_3}.gif");
+    generateRotating(inputPath + "2p{5}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2p{5}.gif");
+    generateRotating(inputPath + "2p{52}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2p{52}.gif");
 
     generate(inputPath + "2{3_4}.ph", 0, 0, true, outputPath + "2{3_4}.png");
     generate(inputPath + "2a{4}.ph", 0, 0, true, outputPath + "2a{4}.png");
@@ -312,6 +315,12 @@ public final class GenerateImage
     generate(inputPath + "3{3_4}.ph", 0, 0, true, outputPath + "3{3_4}.png");
     generate(inputPath + "4{3_3}.ph", 0, 0, true, outputPath + "4{3_3}.png");
     generate(inputPath + "5{3_3}.ph", 0, 0, true, outputPath + "5{3_3}.png");
+    generateRotating(inputPath + "2{3_4}.phr", 2.*Math.PI, 60, 0, 0, true, outputPath + "2{3_4}.gif");
+    generateRotating(inputPath + "2a{4}.phr", 2.*Math.PI, 80, 0, 0, true, outputPath + "2a{4}.gif");
+    generateRotating(inputPath + "4{3_3}.phr", 2.*Math.PI, 80, 0, 0, true, outputPath + "4{3_3}.gif");
+    generateRotating(inputPath + "2a{5}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2a{5}.gif");
+    generateRotating(inputPath + "2a{52}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2a{52}.gif");
+    generateRotating(inputPath + "2a1{52}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2a1{52}.gif");
   }
 
   /**
@@ -358,6 +367,7 @@ public final class GenerateImage
    * Generates a GIF image of a rotating polyhedron.
    * @param inputFileName Filename to read the polyhedron's .phr file.
    * @param maxAngle Maximum angle of rotation to use, before the cycle starts repeating.
+   * @param numSteps Number of animation frames to sweep maxAngle.
    * @param combination Combination within the .ph file to render.
    * @param palette Palette to use for rendering.
    * @param xorCompound Whether to use "alternating fill" for star polygons.
@@ -366,13 +376,13 @@ public final class GenerateImage
   public static void generateRotating(
           final String inputFileName,
           final double maxAngle,
+          final int numSteps,
           final int combination,
           final int palette,
           final boolean xorCompound,
           final String outputFileName) throws IOException
   {
     final List<RenderedImage> renderedImages = new ArrayList<>();
-    final int numSteps = 40;
     for (int step = 0; step < numSteps; step += 1)
       {
         System.out.println(String.format("Processing %s ... (%d/%d)", outputFileName, step, numSteps));
