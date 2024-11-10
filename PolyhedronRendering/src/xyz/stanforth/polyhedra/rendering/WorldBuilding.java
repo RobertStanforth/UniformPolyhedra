@@ -530,7 +530,7 @@ public final class WorldBuilding
     return Vector4.of(vab);
   }
 
-  private static final double EPS = 1.e-4;
+  private static final double EPS = 1.e-6;
 
   private static final int PH_BLUE      = 0x0000FF;
   private static final int PH_YELLOW    = 0xFFFF00;
