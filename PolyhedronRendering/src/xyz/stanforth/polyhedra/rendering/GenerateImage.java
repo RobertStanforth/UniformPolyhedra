@@ -306,6 +306,7 @@ public final class GenerateImage
     generateRotating(inputPath + "2p{5}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2p{5}.gif");
     generateRotating(inputPath + "2p{52}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2p{52}.gif");
 
+    generateRotating(inputPath + "2{3_3}.phr", Math.PI, 40, 0, 0, true, outputPath + "2{3_3}.gif");
     generate(inputPath + "2{3_4}.ph", 0, 0, true, outputPath + "2{3_4}.png");
     generate(inputPath + "2a{4}.ph", 0, 0, true, outputPath + "2a{4}.png");
     generate(inputPath + "2a{5}.ph", 0, 0, true, outputPath + "2a{5}.png");
