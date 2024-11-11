@@ -252,17 +252,17 @@ public final class GenerateImage
 
     generate(inputPath + "3{4_3}.ph", 0, 2, true, outputPath + "3{4_3}.png");
     generate(inputPath + "6{3_3}.ph", 0, 2, true, outputPath + "6{3_3}.png");
-    generateRotating(inputPath + "6{4_3}.phr", Math.PI/2., 40, 0, 0, true, outputPath + "6{4_3}.gif");
-    generateRotating(inputPath + "12{3_3}.phr", Math.PI/2., 40, 0, 0, true, outputPath + "12{3_3}.gif");
-    generateRotating(inputPath + "6{3_3}.phr", Math.PI, 40, 0, 0, true, outputPath + "6{3_3}.gif");
+    generateRotating(inputPath + "6{4_3}.phr", Math.PI/2., 40, 0, 2, true, outputPath + "6{4_3}.gif");
+    generateRotating(inputPath + "12{3_3}.phr", Math.PI/2., 40, 0, 2, true, outputPath + "12{3_3}.gif");
+    generateRotating(inputPath + "6{3_3}.phr", Math.PI, 40, 0, 2, true, outputPath + "6{3_3}.gif");
     generate(inputPath + "3a{4}.ph", 0, 2, true, outputPath + "3a{4}.png");
     generate(inputPath + "6a{4}.ph", 0, 2, true, outputPath + "6a{4}.png");
     generate(inputPath + "4p{3}.ph", 0, 1, true, outputPath + "4p{3}.png");
     generate(inputPath + "8p{3}.ph", 0, 1, true, outputPath + "8p{3}.png");
     generate(inputPath + "4p{6}.ph", 0, 1, true, outputPath + "4p{6}.png");
     generate(inputPath + "4{3_4}.ph", 0, 1, true, outputPath + "4{3_4}.png");
-    generateRotating(inputPath + "4{3_4}.phr", 2.*Math.PI/3., 40, 0, 0, true, outputPath + "4{3_4}.gif");
-    generateRotating(inputPath + "8{3_4}.phr", 2.*Math.PI/3., 40, 0, 0, true, outputPath + "8{3_4}.gif");
+    generateRotating(inputPath + "4{3_4}.phr", 2.*Math.PI/3., 40, 0, 1, true, outputPath + "4{3_4}.gif");
+    generateRotating(inputPath + "8{3_4}.phr", 2.*Math.PI/3., 40, 0, 1, true, outputPath + "8{3_4}.gif");
     generate(inputPath + "6p{5}.ph", 0, 2, true, outputPath + "6p{5}.png");
     generate(inputPath + "12p{5}.ph", 0, 2, true, outputPath + "12p{5}.png");
     generate(inputPath + "6p{52}.ph", 0, 2, true, outputPath + "6p{52}.png");
@@ -273,8 +273,8 @@ public final class GenerateImage
     generate(inputPath + "6p{X3}.ph", 0, 2, true, outputPath + "6p{X3}.png");
     generate(inputPath + "6a{5}.ph", 0, 2, true, outputPath + "6a{5}.png");
     generate(inputPath + "6a1{52}.ph", 0, 2, true, outputPath + "6a1{52}.png");
-    generateRotating(inputPath + "12a{5}.phr", 2.*Math.PI/5., 40, 0, 0, true, outputPath + "12a{5}.gif");
-    generateRotating(inputPath + "12a1{52}.phr", 2.*Math.PI/5., 40, 0, 0, true, outputPath + "12a1{52}.gif");
+    generateRotating(inputPath + "12a{5}.phr", 2.*Math.PI/5., 40, 0, 2, true, outputPath + "12a{5}.gif");
+    generateRotating(inputPath + "12a1{52}.phr", 2.*Math.PI/5., 40, 0, 2, true, outputPath + "12a1{52}.gif");
     generate(inputPath + "10p{3}.ph", 0, 0, true, outputPath + "10p{3}.png");
     generate(inputPath + "20p{3}.ph", 0, 0, true, outputPath + "20p{3}.png");
     generate(inputPath + "10p{6}.ph", 0, 0, true, outputPath + "10p{6}.png");
