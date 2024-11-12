@@ -301,12 +301,11 @@ public final class GenerateImage
     generate(inputPath + "2p{5}.ph", 0, 0, true, outputPath + "2p{5}.png");
     generate(inputPath + "2p{52}.ph", 0, 0, true, outputPath + "2p{52}.png");
     generate(inputPath + "3p{3}.ph", 0, 0, true, outputPath + "3p{3}.png");
-    generateRotating(inputPath + "2p{3}.phr", 2.*Math.PI, 60, 0, 0, true, outputPath + "2p{3}.gif");
-    generateRotating(inputPath + "2{4_3}.phr", 2.*Math.PI, 80, 0, 0, true, outputPath + "2{4_3}.gif");
-    generateRotating(inputPath + "2p{5}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2p{5}.gif");
-    generateRotating(inputPath + "2p{52}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2p{52}.gif");
+    generateRotating(inputPath + "2p{3}.phr", 2.*Math.PI/3., 40, 0, 0, true, outputPath + "2p{3}.gif");
+    generateRotating(inputPath + "2{4_3}.phr", Math.PI/2., 40, 0, 0, true, outputPath + "2{4_3}.gif");
+    generateRotating(inputPath + "2p{5}.phr", 2.*Math.PI/5., 40, 0, 0, true, outputPath + "2p{5}.gif");
+    generateRotating(inputPath + "2p{52}.phr", 2.*Math.PI/5., 40, 0, 0, true, outputPath + "2p{52}.gif");
 
-    generateRotating(inputPath + "2{3_3}.phr", Math.PI, 40, 0, 0, true, outputPath + "2{3_3}.gif");
     generate(inputPath + "2{3_4}.ph", 0, 0, true, outputPath + "2{3_4}.png");
     generate(inputPath + "2a{4}.ph", 0, 0, true, outputPath + "2a{4}.png");
     generate(inputPath + "2a{5}.ph", 0, 0, true, outputPath + "2a{5}.png");
@@ -316,12 +315,13 @@ public final class GenerateImage
     generate(inputPath + "3{3_4}.ph", 0, 0, true, outputPath + "3{3_4}.png");
     generate(inputPath + "4{3_3}.ph", 0, 0, true, outputPath + "4{3_3}.png");
     generate(inputPath + "5{3_3}.ph", 0, 0, true, outputPath + "5{3_3}.png");
-    generateRotating(inputPath + "2{3_4}.phr", 2.*Math.PI, 60, 0, 0, true, outputPath + "2{3_4}.gif");
-    generateRotating(inputPath + "2a{4}.phr", 2.*Math.PI, 80, 0, 0, true, outputPath + "2a{4}.gif");
-    generateRotating(inputPath + "4{3_3}.phr", 2.*Math.PI, 80, 0, 0, true, outputPath + "4{3_3}.gif");
-    generateRotating(inputPath + "2a{5}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2a{5}.gif");
-    generateRotating(inputPath + "2a{52}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2a{52}.gif");
-    generateRotating(inputPath + "2a1{52}.phr", 2.*Math.PI, 100, 0, 0, true, outputPath + "2a1{52}.gif");
+    generateRotating(inputPath + "2{3_3}.phr", Math.PI, 40, 0, 0, true, outputPath + "2{3_3}.gif");
+    generateRotating(inputPath + "2{3_4}.phr", 2.*Math.PI/3., 40, 0, 0, true, outputPath + "2{3_4}.gif");
+    generateRotating(inputPath + "2a{4}.phr", Math.PI/2., 40, 0, 0, true, outputPath + "2a{4}.gif");
+    generateRotating(inputPath + "4{3_3}.phr", Math.PI/2., 40, 0, 0, true, outputPath + "4{3_3}.gif");
+    generateRotating(inputPath + "2a{5}.phr", 2.*Math.PI/5., 40, 0, 0, true, outputPath + "2a{5}.gif");
+    generateRotating(inputPath + "2a{52}.phr", 2.*Math.PI/5., 40, 0, 0, true, outputPath + "2a{52}.gif");
+    generateRotating(inputPath + "2a1{52}.phr", 2.*Math.PI/5., 40, 0, 0, true, outputPath + "2a1{52}.gif");
   }
 
   /**

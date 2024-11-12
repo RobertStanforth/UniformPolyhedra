@@ -217,10 +217,21 @@ public final class WorldBuilding
   private static Transform dihedral2(final int symmetryGroup)
   {
     final int[] colours = new int[25];
+    for (int j = 0; j < colours.length; j += 1)
+      colours[j] = j;
+    // Sequence of colours with period N.
     for (int j = 0; j < symmetryGroup; j += 1)
       colours[j] = (symmetryGroup - j) % symmetryGroup;
-    for (int j = symmetryGroup; j < colours.length; j += 1)
-      colours[j] = j;
+    // Alternating pair of colours.
+    colours[15] = 18;
+    colours[18] = 15;
+    if (symmetryGroup % 2 == 0)
+      {
+        // Alternative sequence of colours with period N/2.
+        for (int j = 0; j < symmetryGroup / 2; j += 1)
+          colours[20 + j] = 20 + (symmetryGroup / 2 - j) % (symmetryGroup / 2);
+      }
+
     return Transform.of(
             new double[][] {
                     {1., 0., 0., 0.},
@@ -240,10 +251,21 @@ public final class WorldBuilding
   private static Transform dihedralN(final int symmetryGroup)
   {
     final int[] colours = new int[25];
+    for (int j = 0; j < colours.length; j += 1)
+      colours[j] = j;
+    // Sequence of colours with period N.
     for (int j = 0; j < symmetryGroup; j += 1)
       colours[j] = (j + 1) % symmetryGroup;
-    for (int j = symmetryGroup; j < colours.length; j += 1)
-      colours[j] = j;
+    // Alternating pair of colours.
+    colours[15] = 15;
+    colours[18] = 18;
+    if (symmetryGroup % 2 == 0)
+      {
+        // Alternative sequence of colours with period N/2.
+        for (int j = 0; j < symmetryGroup / 2; j += 1)
+          colours[20 + j] = 20 + (j + 1) % (symmetryGroup / 2);
+      }
+
     final double c = Math.cos(2.*Math.PI/symmetryGroup);
     final double s = Math.sin(2.*Math.PI/symmetryGroup);
     return Transform.of(
@@ -551,17 +573,17 @@ public final class WorldBuilding
     { // Palette 0: 11 distinct colors for icosidodecahedral faces
       { // Cuboctahedral
         PH_RED,PH_BROWN,PH_PINK,PH_GREEN,                         // octahedral
-                PH_YELLOW,PH_ORANGE,PH_BLUE,                              // hexahedral
-                PH_GREEN,PH_RED,                                          // tetrahedral
-                0,0,
-                PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-                0,0,0,0,PH_GREEN,PH_RED,PH_PURPLE,0,0,0
+        PH_YELLOW,PH_ORANGE,PH_BLUE,                              // hexahedral
+        PH_GREEN,PH_RED,                                          // tetrahedral
+        0,0,
+        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
+        0,0,0,0,PH_GREEN,PH_RED,PH_PURPLE,0,0,0
       },
       { // Icosidodecahedral
         PH_BROWN,PH_PINK,PH_PURPLE,PH_RED,PH_GREEN,               // icosahedral
-                PH_YELLOW,PH_CYAN,PH_BLUE,PH_DGREEN,PH_ORANGE,PH_IVORY,   // dodecahedral
-                PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-                PH_RED,PH_PINK,PH_BROWN,PH_GREEN,PH_PURPLE,PH_ORANGE,PH_YELLOW,PH_BLUE,PH_CYAN,PH_IVORY
+        PH_YELLOW,PH_CYAN,PH_BLUE,PH_DGREEN,PH_ORANGE,PH_IVORY,   // dodecahedral
+        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
+        PH_RED,PH_PINK,PH_BROWN,PH_GREEN,PH_PURPLE,PH_ORANGE,PH_YELLOW,PH_BLUE,PH_CYAN,PH_IVORY
         // icosahedral with
         //   one color for
         //   each plane
@@ -570,17 +592,17 @@ public final class WorldBuilding
     { // Palette 1: hexahedral and dodecahedral faces are white
       { // Cuboctahedral
         PH_RED,PH_YELLOW,PH_BLUE,PH_GREEN,                        // octahedral
-                PH_WHITE,PH_WHITE,PH_WHITE,                               // hexahedral
-                PH_GREEN,PH_RED,                                          // tetrahedral
-                0,0,
-                PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-                0,0,0,0,PH_GREEN,PH_RED,PH_PURPLE,0,0,0
+        PH_WHITE,PH_WHITE,PH_WHITE,                               // hexahedral
+        PH_GREEN,PH_RED,                                          // tetrahedral
+        0,0,
+        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
+        0,0,0,0,PH_GREEN,PH_RED,PH_PURPLE,0,0,0
       },
       { // Icosidodecahedral
         PH_YELLOW,PH_BLUE,PH_PINK,PH_RED,PH_GREEN,                // icosahedral
-                PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,    // dodecahedral
-                PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-                PH_RED,PH_PINK,PH_BROWN,PH_GREEN,PH_PURPLE,PH_ORANGE,PH_YELLOW,PH_BLUE,PH_CYAN,PH_IVORY
+        PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,    // dodecahedral
+        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
+        PH_RED,PH_PINK,PH_BROWN,PH_GREEN,PH_PURPLE,PH_ORANGE,PH_YELLOW,PH_BLUE,PH_CYAN,PH_IVORY
         // icosahedral with
         //   one color for
         //   each plane
@@ -589,17 +611,17 @@ public final class WorldBuilding
     { // Palette 2: octahedral and icosahedral faces are white
       { // Cuboctahedral
         PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,                      // octahedral
-                PH_YELLOW,PH_RED,PH_BLUE,                                 // hexahedral
-                PH_GREEN,PH_PINK,                                         // tetrahedral
-                0,0,
-                PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-                0,0,0,0,PH_GREEN,PH_RED,PH_PURPLE,0,0,0
+        PH_YELLOW,PH_RED,PH_BLUE,                                 // hexahedral
+        PH_GREEN,PH_PINK,                                         // tetrahedral
+        0,0,
+        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
+        0,0,0,0,PH_GREEN,PH_RED,PH_PURPLE,0,0,0
       },
       { // Icosidodecahedral
         PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,             // icosahedral
-                PH_YELLOW,PH_PINK,PH_BLUE,PH_GREEN,PH_ORANGE,PH_RED,      // dodecahedral
-                PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-                PH_RED,PH_PINK,PH_BROWN,PH_GREEN,PH_PURPLE,PH_ORANGE,PH_YELLOW,PH_BLUE,PH_CYAN,PH_IVORY
+        PH_YELLOW,PH_PINK,PH_BLUE,PH_GREEN,PH_ORANGE,PH_RED,      // dodecahedral
+        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
+        PH_RED,PH_PINK,PH_BROWN,PH_GREEN,PH_PURPLE,PH_ORANGE,PH_YELLOW,PH_BLUE,PH_CYAN,PH_IVORY
         // icosahedral with
         //   one color for
         //   each plane
