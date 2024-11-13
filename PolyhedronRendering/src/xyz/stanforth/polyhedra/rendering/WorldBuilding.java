@@ -16,10 +16,10 @@ public final class WorldBuilding
    * Generates a scene of the specified components of the given polyhedron.
    * @param polyhedron Polyhedron to construct as a scene.
    * @param components Bitset indicating the components of the polyhedron to use.
-   * @param palette Palette index.
+   * @param palette Palette.
    * @return Generated scene.
    */
-  public static List<? extends PHShape> generateWorld(final PHPolyhedron polyhedron, final int components, final int palette)
+  public static List<? extends PHShape> generateWorld(final PHPolyhedron polyhedron, final int components, final Palette palette)
   {
     final List<PHTriangle> sceneTriangles = new ArrayList<>();
     for (final PHTriangle triangle : polyhedron.triangles())
@@ -139,13 +139,13 @@ public final class WorldBuilding
         for (int n = 0; n < 3; n += 1)
           vertices.add(transform.apply(triangle.vertices().get(b == 0 || n == 2 ? n : 1-n)));
 
-        final int colour = b == 0 ? triangle.frontColour() : triangle.backColour();
+        final int colourIndex = b == 0 ? triangle.frontColourIndex() : triangle.backColourIndex();
         sceneTriangles.add(new PHTriangle()
         {
           @Override public List<? extends Vector4> vertices() { return vertices; }
-          @Override public int symmetryGroup() { return triangle.symmetryGroup() == 0 || triangle.symmetryGroup() == 2 ? 0 : 1; }
-          @Override public int frontColour() { return transform.apply(colour); }
-          @Override public int backColour() { throw new UnsupportedOperationException(); }
+          @Override public int symmetryGroup() { return triangle.symmetryGroup(); }
+          @Override public int frontColourIndex() { return transform.apply(colourIndex); }
+          @Override public int backColourIndex() { throw new UnsupportedOperationException(); }
           @Override public boolean isCompound() { return triangle.isCompound(); }
           @Override public boolean alternatesColours() { return triangle.alternatesColours(); }
           @Override public int components() { throw new UnsupportedOperationException(); }
@@ -279,7 +279,7 @@ public final class WorldBuilding
     );
   }
 
-  private static List<? extends PHShape> gatherShapes(final List<? extends PHTriangle> sceneTriangles, final int palette)
+  private static List<? extends PHShape> gatherShapes(final List<? extends PHTriangle> sceneTriangles, final Palette palette)
   {
     final List<PHShape> shapes = new ArrayList<>();
     final Set<PHTriangle> consumedTriangles = new HashSet<>();
@@ -292,7 +292,7 @@ public final class WorldBuilding
               {
                 final List<Vector4> vertices = new ArrayList<>();
                 final int[] altVertices = {0};
-                final ColourAlternator colourAlternator = colourAlternator(sceneTriangle.alternatesColours());
+                final ColourAlternator colourIndexAlternator = colourAlternator(sceneTriangle.alternatesColours());
 
                 // Outer loop - over polygons in the shape.
                 double angle = 0.;
@@ -300,7 +300,7 @@ public final class WorldBuilding
                 for (PHTriangle polygonTriangle = sceneTriangle; polygonTriangle != null; polygonTriangle = anotherTriangle(
                         sceneTriangles, consumedTriangles, polygonTriangle))
                   {
-                    colourAlternator.register(polygonTriangle.frontColour());
+                    colourIndexAlternator.register(polygonTriangle.frontColourIndex());
 
                     // Inner loop - over triangles in polygon.
                     for (PHTriangle currentTriangle = polygonTriangle; currentTriangle != null; currentTriangle = nextTriangleInPolygon(
@@ -309,12 +309,12 @@ public final class WorldBuilding
                         final int curVert = vertices.size();
                         consumedTriangles.add(currentTriangle);
                         vertices.add(currentTriangle.vertices().get(0));
-                        if (colourAlternator.isAlternateColour(polygonTriangle.frontColour()))
+                        if (colourIndexAlternator.isAlternateColour(polygonTriangle.frontColourIndex()))
                           altVertices[0] |= 1 << curVert;
-                        if (currentTriangle.frontColour() != polygonTriangle.frontColour())
+                        if (currentTriangle.frontColourIndex() != polygonTriangle.frontColourIndex())
                           throw new RuntimeException("Colour mismatch");
 
-                        if (colourAlternator.isAlternateColour(polygonTriangle.frontColour()))
+                        if (colourIndexAlternator.isAlternateColour(polygonTriangle.frontColourIndex()))
                           angleAlt += angle(currentTriangle);
                         else
                           angle += angle(currentTriangle);
@@ -328,8 +328,10 @@ public final class WorldBuilding
                   @Override public List<? extends Vector4> vertices() { return vertices; }
                   @Override public int winding() { return winding; }
                   @Override public int windingAlt() { return windingAlt; }
-                  @Override public int colour() { return PALETTE[palette][sceneTriangle.symmetryGroup()][colourAlternator.colour(false)]; }
-                  @Override public int colourAlt() { return sceneTriangle.alternatesColours() ? PALETTE[palette][sceneTriangle.symmetryGroup()][colourAlternator.colour(true)] : 0x000000; }
+                  @Override public int colour() { return palette.entry(sceneTriangle.symmetryGroup(), colourIndexAlternator.colour(false)); }
+                  @Override public int colourAlt() { return sceneTriangle.alternatesColours()
+                          ? palette.entry(sceneTriangle.symmetryGroup(), colourIndexAlternator.colour(true))
+                          : palette.background(); }
                   @Override public int altVertices() { return altVertices[0]; }
                 });
               }
@@ -342,8 +344,8 @@ public final class WorldBuilding
                   @Override public List<? extends Vector4> vertices() { return sceneTriangle.vertices(); }
                   @Override public int winding() { return 1; }
                   @Override public int windingAlt() { return 0; }
-                  @Override public int colour() { return PALETTE[palette][sceneTriangle.symmetryGroup()][sceneTriangle.frontColour()]; }
-                  @Override public int colourAlt() { return 0x000000; }
+                  @Override public int colour() { return palette.entry(sceneTriangle.symmetryGroup(), sceneTriangle.frontColourIndex()); }
+                  @Override public int colourAlt() { return palette.background(); }
                   @Override public int altVertices() { return 0; }
                 });
               }
@@ -553,81 +555,6 @@ public final class WorldBuilding
   }
 
   private static final double EPS = 1.e-6;
-
-  private static final int PH_BLUE      = 0x0000FF;
-  private static final int PH_YELLOW    = 0xFFFF00;
-  private static final int PH_GREEN     = 0x00FF00;
-  private static final int PH_RED       = 0xFF0000;
-  private static final int PH_PINK      = 0xFF80BF;
-  private static final int PH_ORANGE    = 0xFF4000;
-  private static final int PH_DGREEN    = 0x408000;
-  private static final int PH_CYAN      = 0x00BFFF;
-  private static final int PH_PURPLE    = 0xBF00FF;
-  private static final int PH_BROWN     = 0x804000;
-  private static final int PH_IVORY     = 0xFFFF80;
-  private static final int PH_WHITE     = 0xFFFFFF;
-  private static final int PH_BLACK     = 0x000000;
-
-  private static final int[][][] PALETTE =
-  {
-    { // Palette 0: 11 distinct colors for icosidodecahedral faces
-      { // Cuboctahedral
-        PH_RED,PH_BROWN,PH_PINK,PH_GREEN,                         // octahedral
-        PH_YELLOW,PH_ORANGE,PH_BLUE,                              // hexahedral
-        PH_GREEN,PH_RED,                                          // tetrahedral
-        0,0,
-        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-        0,0,0,0,PH_GREEN,PH_RED,PH_PURPLE,0,0,0
-      },
-      { // Icosidodecahedral
-        PH_BROWN,PH_PINK,PH_PURPLE,PH_RED,PH_GREEN,               // icosahedral
-        PH_YELLOW,PH_CYAN,PH_BLUE,PH_DGREEN,PH_ORANGE,PH_IVORY,   // dodecahedral
-        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-        PH_RED,PH_PINK,PH_BROWN,PH_GREEN,PH_PURPLE,PH_ORANGE,PH_YELLOW,PH_BLUE,PH_CYAN,PH_IVORY
-        // icosahedral with
-        //   one color for
-        //   each plane
-      }
-    },
-    { // Palette 1: hexahedral and dodecahedral faces are white
-      { // Cuboctahedral
-        PH_RED,PH_YELLOW,PH_BLUE,PH_GREEN,                        // octahedral
-        PH_WHITE,PH_WHITE,PH_WHITE,                               // hexahedral
-        PH_GREEN,PH_RED,                                          // tetrahedral
-        0,0,
-        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-        0,0,0,0,PH_GREEN,PH_RED,PH_PURPLE,0,0,0
-      },
-      { // Icosidodecahedral
-        PH_YELLOW,PH_BLUE,PH_PINK,PH_RED,PH_GREEN,                // icosahedral
-        PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,    // dodecahedral
-        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-        PH_RED,PH_PINK,PH_BROWN,PH_GREEN,PH_PURPLE,PH_ORANGE,PH_YELLOW,PH_BLUE,PH_CYAN,PH_IVORY
-        // icosahedral with
-        //   one color for
-        //   each plane
-      }
-    },
-    { // Palette 2: octahedral and icosahedral faces are white
-      { // Cuboctahedral
-        PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,                      // octahedral
-        PH_YELLOW,PH_RED,PH_BLUE,                                 // hexahedral
-        PH_GREEN,PH_PINK,                                         // tetrahedral
-        0,0,
-        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-        0,0,0,0,PH_GREEN,PH_RED,PH_PURPLE,0,0,0
-      },
-      { // Icosidodecahedral
-        PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,PH_WHITE,             // icosahedral
-        PH_YELLOW,PH_PINK,PH_BLUE,PH_GREEN,PH_ORANGE,PH_RED,      // dodecahedral
-        PH_WHITE,PH_RED,PH_YELLOW,PH_BLUE,                        // fixed colors
-        PH_RED,PH_PINK,PH_BROWN,PH_GREEN,PH_PURPLE,PH_ORANGE,PH_YELLOW,PH_BLUE,PH_CYAN,PH_IVORY
-        // icosahedral with
-        //   one color for
-        //   each plane
-      }
-    }
-  };
 
   private WorldBuilding() {}
 }

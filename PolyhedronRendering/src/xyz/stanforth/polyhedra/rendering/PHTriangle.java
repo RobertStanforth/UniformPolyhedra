@@ -27,12 +27,12 @@ public interface PHTriangle
   /**
    * @return Colour (palette index) for face's front.
    */
-  int frontColour();
+  int frontColourIndex();
 
   /**
    * @return Colour (palette index) for face's back.
    */
-  int backColour();
+  int backColourIndex();
 
   /**
    * @return Whether the triangle combines with others to form a larger polygon centred on the triangle's third vertex.
@@ -76,10 +76,10 @@ public interface PHTriangle
     final Ref<Integer> symmetryGroup = new Ref<>();
     Parsing.readInt(symmetryGroup, reader, ch);
 
-    final Ref<Integer> frontColour = new Ref<>();
-    Parsing.readInt(frontColour, reader, ch);
-    final Ref<Integer> backColour = new Ref<>();
-    Parsing.readInt(backColour, reader, ch);
+    final Ref<Integer> frontColourIndex = new Ref<>();
+    Parsing.readInt(frontColourIndex, reader, ch);
+    final Ref<Integer> backColourIndex = new Ref<>();
+    Parsing.readInt(backColourIndex, reader, ch);
 
     final Ref<Integer> compound = new Ref<>();
     Parsing.readInt(compound, reader, ch);
@@ -91,8 +91,8 @@ public interface PHTriangle
     {
       @Override public List<? extends Vector4> vertices() { return vertices; }
       @Override public int symmetryGroup() { return symmetryGroup.value(); }
-      @Override public int frontColour() { return frontColour.value(); }
-      @Override public int backColour() { return backColour.value(); }
+      @Override public int frontColourIndex() { return frontColourIndex.value(); }
+      @Override public int backColourIndex() { return backColourIndex.value(); }
       @Override public boolean isCompound() { return compound.value() != 0; }
       @Override public boolean alternatesColours() { return compound.value() == 2; }
       @Override public int components() { return components.value(); }
@@ -128,10 +128,10 @@ public interface PHTriangle
     final Ref<Integer> symmetryGroup = new Ref<>();
     Parsing.readInt(symmetryGroup, reader, ch);
 
-    final Ref<Integer> frontColour = new Ref<>();
-    Parsing.readInt(frontColour, reader, ch);
-    final Ref<Integer> backColour = new Ref<>();
-    Parsing.readInt(backColour, reader, ch);
+    final Ref<Integer> frontColourIndex = new Ref<>();
+    Parsing.readInt(frontColourIndex, reader, ch);
+    final Ref<Integer> backColourIndex = new Ref<>();
+    Parsing.readInt(backColourIndex, reader, ch);
 
     final Ref<Integer> compound = new Ref<>();
     Parsing.readInt(compound, reader, ch);
@@ -159,8 +159,8 @@ public interface PHTriangle
       }; }
 
       @Override public int symmetryGroup() { return symmetryGroup.value(); }
-      @Override public int frontColour() { return frontColour.value(); }
-      @Override public int backColour() { return backColour.value(); }
+      @Override public int frontColourIndex() { return frontColourIndex.value(); }
+      @Override public int backColourIndex() { return backColourIndex.value(); }
       @Override public boolean isCompound() { return compound.value() != 0; }
       @Override public boolean alternatesColours() { return compound.value() == 2; }
       @Override public int components() { return components.value(); }
