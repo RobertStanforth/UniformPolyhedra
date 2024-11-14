@@ -1,5 +1,6 @@
-package xyz.stanforth.polyhedra.rendering;
+package xyz.stanforth.polyhedra.images;
 
+import xyz.stanforth.polyhedra.rendering.*;
 import xyz.stanforth.util.Pair;
 import xyz.stanforth.util.Ref;
 
@@ -49,11 +50,11 @@ public final class GenerateImage
               final String outputFileName) throws IOException
       {
         System.out.println("Processing " + outputFileName + " ...");
-        final PHPolyhedron polyhedron = loadPolyhedron(inputFileName);
+        final Polyhedron polyhedron = loadPolyhedron(inputFileName);
 
-        final List<? extends PHShape> worldShapes = WorldBuilding.generateWorld(polyhedron, 1<<combination, palette);
+        final List<? extends Shape> worldShapes = WorldBuilding.generateWorld(polyhedron, 1<<combination, palette);
 
-        final List<? extends PHShape> projectedShapes = Viewing.view(
+        final List<? extends Shape> projectedShapes = Viewing.view(
                 worldShapes,
                 eye,
                 0x999999,
@@ -86,11 +87,11 @@ public final class GenerateImage
         for (int step = 0; step < numSteps; step += 1)
           {
             System.out.println(String.format("Processing %s ... (%d/%d)", outputFileName, step, numSteps));
-            final PHPolyhedron polyhedron = loadRotatingPolyhedron(inputFileName).apply((.25+step)*maxAngle/numSteps);
+            final Polyhedron polyhedron = loadRotatingPolyhedron(inputFileName).apply((.25+step)*maxAngle/numSteps);
 
-            final List<? extends PHShape> worldShapes = WorldBuilding.generateWorld(polyhedron, 1<<combination, palette);
+            final List<? extends Shape> worldShapes = WorldBuilding.generateWorld(polyhedron, 1<<combination, palette);
 
-            final List<? extends PHShape> projectedShapes = Viewing.view(
+            final List<? extends Shape> projectedShapes = Viewing.view(
                     worldShapes,
                     eye,
                     0x999999,
@@ -121,14 +122,14 @@ public final class GenerateImage
    * @param fileName File name from which to load.
    * @return Loaded polyhedron.
    */
-  public static PHPolyhedron loadPolyhedron(final String fileName) throws IOException
+  public static Polyhedron loadPolyhedron(final String fileName) throws IOException
   {
-    final Ref<PHPolyhedron> polyhedron = new Ref<>();
+    final Ref<Polyhedron> polyhedron = new Ref<>();
     try (Reader reader = new BufferedReader(new FileReader(fileName)))
       {
         final Ref<Integer> ch = new Ref<>();
         ch.set(reader.read());
-        PHPolyhedron.read(polyhedron, reader, ch);
+        Polyhedron.read(polyhedron, reader, ch);
       }
     return polyhedron.value();
   }
@@ -138,14 +139,14 @@ public final class GenerateImage
    * @param fileName File name from which to load.
    * @return Loaded polyhedron.
    */
-  public static DoubleFunction<? extends PHPolyhedron> loadRotatingPolyhedron(final String fileName) throws IOException
+  public static DoubleFunction<? extends Polyhedron> loadRotatingPolyhedron(final String fileName) throws IOException
   {
-    final Ref<DoubleFunction<? extends PHPolyhedron>> polyhedron = new Ref<>();
+    final Ref<DoubleFunction<? extends Polyhedron>> polyhedron = new Ref<>();
     try (Reader reader = new BufferedReader(new FileReader(fileName)))
       {
         final Ref<Integer> ch = new Ref<>();
         ch.set(reader.read());
-        PHPolyhedron.readRotating(polyhedron, reader, ch);
+        Polyhedron.readRotating(polyhedron, reader, ch);
       }
     return polyhedron.value();
   }

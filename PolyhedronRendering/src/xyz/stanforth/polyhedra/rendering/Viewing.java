@@ -19,16 +19,16 @@ public final class Viewing
    * @param gamma Gamma correction.
    * @return Projected scene to plot.
    */
-  public static List<? extends PHShape> view(
-          final List<? extends PHShape> worldShapes,
+  public static List<? extends Shape> view(
+          final List<? extends Shape> worldShapes,
           final Transform inverseEye,
           final int ambientLightColour,
           final int diffuseLightColour,
           final Vector4 diffuseLightDirection,
           final double gamma)
   {
-    final List<PHShape> projectedShapes = new ArrayList<>();
-    for (final PHShape shape : worldShapes)
+    final List<Shape> projectedShapes = new ArrayList<>();
+    for (final Shape shape : worldShapes)
       {
         final List<? extends Vector4> worldVertices = shape.vertices().stream()
                 .map(inverseEye::apply).toList();
@@ -61,7 +61,7 @@ public final class Viewing
                     .map(Viewing::project)
                     .collect(Collectors.toList());
 
-            projectedShapes.add(new PHShape()
+            projectedShapes.add(new Shape()
             {
               @Override public List<? extends Vector4> vertices() { return projectedVertices; }
               @Override public int winding() { return shape.winding(); }

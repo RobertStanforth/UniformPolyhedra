@@ -1,4 +1,6 @@
-package xyz.stanforth.polyhedra.rendering;
+package xyz.stanforth.polyhedra.images;
+
+import xyz.stanforth.polyhedra.rendering.Palette;
 
 import java.io.IOException;
 

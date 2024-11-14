@@ -12,7 +12,7 @@ import java.util.function.DoubleFunction;
 /**
  * Triangle of a polyhedron.
  */
-public interface PHTriangle
+public interface Triangle
 {
   /**
    * @return Three vertices of the triangle, each as [x, y, z, 1] coordinates.
@@ -57,7 +57,7 @@ public interface PHTriangle
    * @param reader Reader.
    * @param ch Maintains the most recent character taken from the reader, or -1 if EOF.
    */
-  static void read(final Ref<? super PHTriangle> triangle, final Reader reader, final Ref<Integer> ch) throws IOException
+  static void read(final Ref<? super Triangle> triangle, final Reader reader, final Ref<Integer> ch) throws IOException
   {
     final List<Vector4> vertices = new ArrayList<>();
     for (int n = 0; n < 3; n += 1)
@@ -87,7 +87,7 @@ public interface PHTriangle
     final Ref<Integer> components = new Ref<>();
     Parsing.readInt(components, reader, ch);
 
-    triangle.set(new PHTriangle()
+    triangle.set(new Triangle()
     {
       @Override public List<? extends Vector4> vertices() { return vertices; }
       @Override public int symmetryGroup() { return symmetryGroup.value(); }
@@ -105,7 +105,7 @@ public interface PHTriangle
    * @param reader Reader.
    * @param ch Maintains the most recent character taken from the reader, or -1 if EOF.
    */
-  static void readRotating(final Ref<? super DoubleFunction<? extends PHTriangle>> rotatingTriangle, final Reader reader, final Ref<Integer> ch) throws IOException
+  static void readRotating(final Ref<? super DoubleFunction<? extends Triangle>> rotatingTriangle, final Reader reader, final Ref<Integer> ch) throws IOException
   {
     // Expect nine vectors. The vertices are:
     // v[0] + v[1] cos t + v[2] sin t
@@ -139,7 +139,7 @@ public interface PHTriangle
     final Ref<Integer> components = new Ref<>();
     Parsing.readInt(components, reader, ch);
 
-    rotatingTriangle.set((DoubleFunction<PHTriangle>) (final double angle) -> new PHTriangle()
+    rotatingTriangle.set((DoubleFunction<Triangle>) (final double angle) -> new Triangle()
     {
       @Override
       public List<? extends Vector4> vertices() { return new AbstractList<>()

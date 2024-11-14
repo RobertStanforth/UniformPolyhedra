@@ -1,5 +1,6 @@
-package xyz.stanforth.polyhedra.rendering;
+package xyz.stanforth.polyhedra.images;
 
+import xyz.stanforth.polyhedra.rendering.Canvas;
 import xyz.stanforth.util.Pair;
 import xyz.stanforth.util.Pairs;
 

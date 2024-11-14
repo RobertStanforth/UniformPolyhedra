@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Polygon, possibly compound.
  */
-public interface PHShape
+public interface Shape
 {
   /**
    * @return Vertices of the polygon.

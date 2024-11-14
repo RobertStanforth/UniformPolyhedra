@@ -19,10 +19,10 @@ public final class WorldBuilding
    * @param palette Palette.
    * @return Generated scene.
    */
-  public static List<? extends PHShape> generateWorld(final PHPolyhedron polyhedron, final int components, final Palette palette)
+  public static List<? extends Shape> generateWorld(final Polyhedron polyhedron, final int components, final Palette palette)
   {
-    final List<PHTriangle> sceneTriangles = new ArrayList<>();
-    for (final PHTriangle triangle : polyhedron.triangles())
+    final List<Triangle> sceneTriangles = new ArrayList<>();
+    for (final Triangle triangle : polyhedron.triangles())
       {
         if (Integer.bitCount(triangle.components() & components) % 2 != 0)
           {
@@ -38,7 +38,7 @@ public final class WorldBuilding
    * @param sceneTriangles Populated on exit with the replicated triangles.
    * @param triangle Triangle to replicate.
    */
-  private static void compileTriangleSet(final List<? super PHTriangle> sceneTriangles, final PHTriangle triangle)
+  private static void compileTriangleSet(final List<? super Triangle> sceneTriangles, final Triangle triangle)
   {
     if (triangle.symmetryGroup() < 0)
       {
@@ -101,7 +101,7 @@ public final class WorldBuilding
             transform3 = Transform.compose(icosidodecahedral3, transform3);
           }
       }
-    else if (triangle.symmetryGroup() <= PHTriangle.MAX_PRISM)
+    else if (triangle.symmetryGroup() <= Triangle.MAX_PRISM)
       {
         // Dihedral symmetry.
         final Transform dihedral2 = dihedral2(triangle.symmetryGroup());
@@ -129,7 +129,7 @@ public final class WorldBuilding
    * @param transform Symmetry transform to apply.
    * @param triangle Triangle to replicate.
    */
-  private static void compileTriangle(final List<? super PHTriangle> sceneTriangles, final Transform transform, final PHTriangle triangle)
+  private static void compileTriangle(final List<? super Triangle> sceneTriangles, final Transform transform, final Triangle triangle)
   {
     // Create front and back, as separate triangles.
     for (int b = 0; b < 2; b += 1)
@@ -140,7 +140,7 @@ public final class WorldBuilding
           vertices.add(transform.apply(triangle.vertices().get(b == 0 || n == 2 ? n : 1-n)));
 
         final int colourIndex = b == 0 ? triangle.frontColourIndex() : triangle.backColourIndex();
-        sceneTriangles.add(new PHTriangle()
+        sceneTriangles.add(new Triangle()
         {
           @Override public List<? extends Vector4> vertices() { return vertices; }
           @Override public int symmetryGroup() { return triangle.symmetryGroup(); }
@@ -279,11 +279,11 @@ public final class WorldBuilding
     );
   }
 
-  private static List<? extends PHShape> gatherShapes(final List<? extends PHTriangle> sceneTriangles, final Palette palette)
+  private static List<? extends Shape> gatherShapes(final List<? extends Triangle> sceneTriangles, final Palette palette)
   {
-    final List<PHShape> shapes = new ArrayList<>();
-    final Set<PHTriangle> consumedTriangles = new HashSet<>();
-    for (final PHTriangle sceneTriangle : sceneTriangles)
+    final List<Shape> shapes = new ArrayList<>();
+    final Set<Triangle> consumedTriangles = new HashSet<>();
+    for (final Triangle sceneTriangle : sceneTriangles)
       {
         if (!consumedTriangles.contains(sceneTriangle))
           {
@@ -297,13 +297,13 @@ public final class WorldBuilding
                 // Outer loop - over polygons in the shape.
                 double angle = 0.;
                 double angleAlt = 0.;
-                for (PHTriangle polygonTriangle = sceneTriangle; polygonTriangle != null; polygonTriangle = anotherTriangle(
+                for (Triangle polygonTriangle = sceneTriangle; polygonTriangle != null; polygonTriangle = anotherTriangle(
                         sceneTriangles, consumedTriangles, polygonTriangle))
                   {
                     colourIndexAlternator.register(polygonTriangle.frontColourIndex());
 
                     // Inner loop - over triangles in polygon.
-                    for (PHTriangle currentTriangle = polygonTriangle; currentTriangle != null; currentTriangle = nextTriangleInPolygon(
+                    for (Triangle currentTriangle = polygonTriangle; currentTriangle != null; currentTriangle = nextTriangleInPolygon(
                             sceneTriangles, consumedTriangles, polygonTriangle.vertices().get(0), currentTriangle))
                       {
                         final int curVert = vertices.size();
@@ -323,7 +323,7 @@ public final class WorldBuilding
 
                 final int winding = (int)(angle/(2.*Math.PI) + .5);
                 final int windingAlt = (int)(angleAlt/(2.*Math.PI) + .5);
-                shapes.add(new PHShape()
+                shapes.add(new Shape()
                 {
                   @Override public List<? extends Vector4> vertices() { return vertices; }
                   @Override public int winding() { return winding; }
@@ -339,7 +339,7 @@ public final class WorldBuilding
               {
                 // Not a compound triangle.
                 consumedTriangles.add(sceneTriangle);
-                shapes.add(new PHShape()
+                shapes.add(new Shape()
                 {
                   @Override public List<? extends Vector4> vertices() { return sceneTriangle.vertices(); }
                   @Override public int winding() { return 1; }
@@ -362,12 +362,12 @@ public final class WorldBuilding
    * @param polygonTriangle Triangle whose whose centre and plane are to be matched.
    * @return An available triangle with the same centre and plane as given, or {@code null} if there are none left.
    */
-  private static PHTriangle anotherTriangle(
-          final List<? extends PHTriangle> sceneTriangles,
-          final Set<? extends PHTriangle> consumedTriangles,
-          final PHTriangle polygonTriangle)
+  private static Triangle anotherTriangle(
+          final List<? extends Triangle> sceneTriangles,
+          final Set<? extends Triangle> consumedTriangles,
+          final Triangle polygonTriangle)
   {
-    for (final PHTriangle nextTriangle : sceneTriangles)
+    for (final Triangle nextTriangle : sceneTriangles)
       if (!consumedTriangles.contains(nextTriangle)
               && nextTriangle.isCompound()
               && nextTriangle.alternatesColours() == polygonTriangle.alternatesColours())
@@ -391,11 +391,11 @@ public final class WorldBuilding
    * @return An available triangle with the same centre and plane as given, matching another vertex to continue the sweep,
    *    or {@code null} if the polygon has just been closed.
    */
-  private static PHTriangle nextTriangleInPolygon(
-          final List<? extends PHTriangle> sceneTriangles,
-          final Set<? extends PHTriangle> consumedTriangles,
+  private static Triangle nextTriangleInPolygon(
+          final List<? extends Triangle> sceneTriangles,
+          final Set<? extends Triangle> consumedTriangles,
           final Vector4 polygonBeginVertex,
-          final PHTriangle currentTriangle)
+          final Triangle currentTriangle)
   {
     if (dist2(polygonBeginVertex, currentTriangle.vertices().get(1)) < EPS)
       {
@@ -403,7 +403,7 @@ public final class WorldBuilding
         return null;
       }
 
-    for (final PHTriangle nextTriangle : sceneTriangles)
+    for (final Triangle nextTriangle : sceneTriangles)
       if (!consumedTriangles.contains(nextTriangle)
               && nextTriangle.isCompound()
               && nextTriangle.alternatesColours() == currentTriangle.alternatesColours())
@@ -519,7 +519,7 @@ public final class WorldBuilding
    * @param triangle Triangle.
    * @return Angle swept by the triangle about its last vertex.
    */
-  private static double angle(final PHTriangle triangle)
+  private static double angle(final Triangle triangle)
   {
     double saa = 0.;
     double sab = 0.;
@@ -539,7 +539,7 @@ public final class WorldBuilding
    * @param triangle Triangle.
    * @return Normal vector to the triangle, computed as (v_0 - v_2)×(v_1 - v_2).
    */
-  private static Vector4 normal(final PHTriangle triangle)
+  private static Vector4 normal(final Triangle triangle)
   {
     final double[] vab = new double[4];
     for (int j = 0; j < 3; j += 1)

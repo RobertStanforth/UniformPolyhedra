@@ -19,7 +19,7 @@ public final class Plotting
    */
   public static void plot(
           final Canvas canvas,
-          final List<? extends PHShape> shapes,
+          final List<? extends Shape> shapes,
           final boolean xorCompound,
           final double inradius)
   {
@@ -155,7 +155,7 @@ public final class Plotting
           {
             // Just draw the rectangle.
             final Map.Entry<ProjectedShape, ClipStatus> shapeClipStatus = nextShapes.entrySet().iterator().next();
-            final PHShape shape = shapeClipStatus.getKey().shape();
+            final Shape shape = shapeClipStatus.getKey().shape();
             final ClipStatus clipStatus = shapeClipStatus.getValue();
 
             final int colour = clipStatus == ClipStatus.FULLALT ? shape.colourAlt() : shape.colour();
@@ -211,7 +211,7 @@ public final class Plotting
         if (leastDeepProjectedShape != null && leastDeepClipStatus != null)
           {
             // Draw the pixel.
-            final PHShape shape = leastDeepProjectedShape.shape();
+            final Shape shape = leastDeepProjectedShape.shape();
             final ClipStatus clipStatus = leastDeepClipStatus;
 
             final int colour = clipStatus == ClipStatus.FULLALT ? shape.colourAlt() : shape.colour();
@@ -227,7 +227,7 @@ public final class Plotting
    */
   private interface ProjectedShape
   {
-    PHShape shape();
+    Shape shape();
     double depth(double x, double y);
     double isInside(int n, double x, double y);
   }
@@ -237,7 +237,7 @@ public final class Plotting
    * @param shape Polygonal shape to project.
    * @return Projected polygon.
    */
-  private static ProjectedShape projectedShape(final PHShape shape)
+  private static ProjectedShape projectedShape(final Shape shape)
   {
     // Determine depth coefficients.
     // Depth is modelled by the equation  z = da x + db y + dc .
@@ -294,7 +294,7 @@ public final class Plotting
 
     return new ProjectedShape()
     {
-      @Override public PHShape shape() { return shape; }
+      @Override public Shape shape() { return shape; }
       @Override public double depth(final double x, final double y) { return da * x + db * y + dc; }
       @Override public double isInside(final int n, final double x, final double y) { return ea[n] * x + eb[n] * y - ec[n]; }
     };
@@ -347,7 +347,7 @@ public final class Plotting
           final ProjectedShape projectedShape
   )
   {
-    final PHShape shape = projectedShape.shape();
+    final Shape shape = projectedShape.shape();
     final int nv = shape.vertices().size();
     final int w = shape.winding() + shape.windingAlt();
     // Count the number of edges for which the rectangle is
