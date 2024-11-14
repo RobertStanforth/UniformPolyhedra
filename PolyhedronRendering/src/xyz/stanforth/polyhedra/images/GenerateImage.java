@@ -22,6 +22,7 @@ public final class GenerateImage
   {
     final String projectPath = "C:\\Users\\Robert\\Projects\\Polyhedra\\UniformPolyhedra\\";
     SiteImages.enumerate(imageGenerator(), projectPath + "Assets\\", projectPath + "Images\\");
+//    imageGenerator().generate(projectPath + "Assets\\Uniform\\r{52x5}.ph", 0, Palette.ALT_A, false, projectPath + "Images\\r{52x5}.png");
   }
 
   /**
@@ -30,8 +31,9 @@ public final class GenerateImage
    */
   public static ImageGenerator imageGenerator()
   {
-    final Transform eye = Viewing.inverseEye(Math.PI - 1.1, Math.PI + 0.12, 10.);
-    final double inradius = 0.102;
+    final double distance = 10.;
+    final Transform eye = Viewing.inverseEye(Math.PI - 1.1, Math.PI + 0.12, distance);
+    final double zoom = distance / 1.02;
 
     return new ImageGenerator()
     {
@@ -57,6 +59,7 @@ public final class GenerateImage
         final List<? extends Shape> projectedShapes = Viewing.view(
                 worldShapes,
                 eye,
+                zoom,
                 0x999999,
                 0x666666,
                 Vector4.of(0., 0., -1., 0.),
@@ -67,7 +70,7 @@ public final class GenerateImage
         final Canvas canvas = canvasWithImageSupplier.first();
         final Supplier<? extends RenderedImage> imageSupplier = canvasWithImageSupplier.second();
 
-        Plotting.plot(canvas, projectedShapes, xorCompound, inradius);
+        Plotting.plot(canvas, projectedShapes, xorCompound);
         final RenderedImage image = imageSupplier.get();
 
         saveImage(outputFileName, image);
@@ -94,6 +97,7 @@ public final class GenerateImage
             final List<? extends Shape> projectedShapes = Viewing.view(
                     worldShapes,
                     eye,
+                    zoom,
                     0x999999,
                     0x666666,
                     Vector4.of(0., 0., -1., 0.),
@@ -104,7 +108,7 @@ public final class GenerateImage
             final Canvas canvas = canvasWithImageSupplier.first();
             final Supplier<? extends RenderedImage> imageSupplier = canvasWithImageSupplier.second();
 
-            Plotting.plot(canvas, projectedShapes, xorCompound, inradius);
+            Plotting.plot(canvas, projectedShapes, xorCompound);
             renderedImages.add(imageSupplier.get());
           }
 

@@ -13,6 +13,7 @@ public final class Viewing
    * Transforms, shades, and projects the world scene ready for plotting.
    * @param worldShapes World scene to view.
    * @param inverseEye Transformation to apply to the world to line it up with an eye at the origin looking in the -z direction.
+   * @param zoom Factor by which to zoom in.
    * @param ambientLightColour RGB value of ambient light.
    * @param diffuseLightColour RGB value of diffuse light.
    * @param diffuseLightDirection Direction of diffuse light, relative to the eye.
@@ -22,6 +23,7 @@ public final class Viewing
   public static List<? extends Shape> view(
           final List<? extends Shape> worldShapes,
           final Transform inverseEye,
+          final double zoom,
           final int ambientLightColour,
           final int diffuseLightColour,
           final Vector4 diffuseLightDirection,
@@ -58,7 +60,7 @@ public final class Viewing
             final int colourAlt = toRGB(dcolourAlt);
 
             final List<? extends Vector4> projectedVertices = worldVertices.stream()
-                    .map(Viewing::project)
+                    .map((final Vector4 v) -> project(v, zoom))
                     .collect(Collectors.toList());
 
             projectedShapes.add(new Shape()
@@ -96,15 +98,17 @@ public final class Viewing
 
   /**
    * @param v Vector [x, y, z, 1] to project.
-   * @return Projected vector [-x/z, -y/z, -1/z, 1].
+   * @param zoom Factor by which to zoom in. This does not dilate the object (as it does not expand towards the eye),
+   *            but adjusts the projected vector.
+   * @return Projected vector zoom * [-x/z, -y/z, -1/z, 1].
    */
-  private static Vector4 project(final Vector4 v)
+  private static Vector4 project(final Vector4 v, final double zoom)
   {
     return Vector4.of(
-            v.elt(0) / -v.elt(2),
-            v.elt(1) / -v.elt(2),
-            v.elt(3) / -v.elt(2),
-            -v.elt(2) / -v.elt(2)
+            zoom * v.elt(0) / -v.elt(2),
+            zoom * v.elt(1) / -v.elt(2),
+            zoom * v.elt(3) / -v.elt(2),
+            zoom * -v.elt(2) / -v.elt(2)
     );
   }
 

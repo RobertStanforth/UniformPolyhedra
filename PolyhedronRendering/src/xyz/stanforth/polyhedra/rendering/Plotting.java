@@ -11,20 +11,18 @@ import java.util.Map;
 public final class Plotting
 {
   /**
-   * Plots the shapes to the given canvas.
+   * Plots the shapes to the given canvas. The canvas corresponds to projected coordinates (±1, ±1).
    * @param canvas Surface upon which to plot.
    * @param shapes Polygonal shapes to plot.
    * @param xorCompound Whether to use alternating-fill for star polygons.
-   * @param inradius Semi-width (and semi-height) of the projected view.
    */
   public static void plot(
           final Canvas canvas,
           final List<? extends Shape> shapes,
-          final boolean xorCompound,
-          final double inradius)
+          final boolean xorCompound)
   {
     final int width = canvas.width();
-    final double scale = (double)width / (2. * inradius);
+    final double scale = (double)width / 2.;
     final int i_origin = width/2;
     final int j_origin = width/2;
 
