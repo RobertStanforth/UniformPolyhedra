@@ -5,6 +5,8 @@ Enumeration of uniform polyhedra with integer arithmetic
 
 [Definitions](Docs/Definitions.md)
 
+[Symmetry](Docs/Symmetry.md)
+
 ## Galleries
 
 [Uniform Polyhedra](Docs/Gallery-Simple.md)
